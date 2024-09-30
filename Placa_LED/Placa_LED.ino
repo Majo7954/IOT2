@@ -44,23 +44,37 @@ void loop() {
         estado = response.toInt();
         Serial.println("Estado recibido: " + String(estado));
 
-        // Apagar todos los LEDs
+        // Apagar todos los LEDs antes de cualquier acción
         redLED.show(LOW);
         yellowLED.show(LOW);
         greenLED.show(LOW);
 
-        // Encender LED según el estado
+        // Controlar LEDs según el estado recibido
         switch (estado) {
-            case 0:  // Estado 0: Todos los LEDs apagados
+            case 0:  // Estado 0: Apagar todos los LEDs
+                Serial.println("Estado 0: Todos los LEDs apagados.");
+                // Todos los LEDs se mantendrán apagados
                 break;
-            case 1:  // Estado 1: LED Rojo
-                redLED.show(HIGH);
+            case 1:  // Estado 1: LED Rojo parpadea rápidamente
+                Serial.println("Estado 1: LED Rojo parpadea rápido.");
+                redLED.blink(100, 255);  // Parpadeo rápido, intensidad máxima
+                yellowLED.show(LOW);     // Asegurarse de que los otros LEDs estén apagados
+                greenLED.show(LOW);
                 break;
-            case 2:  // Estado 2: LED Amarillo
-                yellowLED.show(HIGH);
+            case 2:  // Estado 2: LED Amarillo parpadea normal
+                Serial.println("Estado 2: LED Amarillo parpadea normal.");
+                yellowLED.blink(500, 255);  // Parpadeo normal, intensidad máxima
+                redLED.show(LOW);            // Asegurarse de que los otros LEDs estén apagados
+                greenLED.show(LOW);
                 break;
-            case 3:  // Estado 3: LED Verde
-                greenLED.show(HIGH);
+            case 3:  // Estado 3: LED Verde parpadea lentamente
+                Serial.println("Estado 3: LED Verde parpadea lento.");
+                greenLED.blink(1000, 255);  // Parpadeo lento, intensidad máxima
+                redLED.show(LOW);           // Asegurarse de que los otros LEDs estén apagados
+                yellowLED.show(LOW);
+                break;
+            default:
+                Serial.println("Estado no reconocido.");
                 break;
         }
 
@@ -69,5 +83,5 @@ void loop() {
         Serial.println("Conexión fallida al servidor.");
     }
 
-    delay(2000);  // Esperar 2 segundos antes de la próxima solicitud
+    delay(1000);  // Esperar 1 segundo antes de la próxima solicitud
 }
