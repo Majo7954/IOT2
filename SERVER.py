@@ -2,9 +2,8 @@ import socket
 import os
 from _thread import *
 
-# Configuración del servidor
 ServerSocket = socket.socket()
-host = "0.0.0.0"  # Cambia esto por la IP local si es necesario, por ejemplo, "192.168.0.9"
+host = "0.0.0.0"
 port = 2020
 distance = -1
 
@@ -18,7 +17,6 @@ except socket.error as e:
 print("Esperando conexiones...")
 ServerSocket.listen(5)
 
-# Función que maneja cada conexión de cliente en un nuevo hilo
 def threaded_client(connection):
     global distance
     while True:
@@ -46,7 +44,6 @@ def threaded_client(connection):
     connection.close()
     print("Conexión cerrada")
 
-# Bucle principal para aceptar nuevas conexiones
 try:
     while True:
         Client, address = ServerSocket.accept()
