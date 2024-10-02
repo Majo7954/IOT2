@@ -14,4 +14,4 @@ private:
     int echoPin;
 };
 
-#endif // ULTRASONICSENSOR_H
+#endif

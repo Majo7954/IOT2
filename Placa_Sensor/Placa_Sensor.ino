@@ -2,11 +2,9 @@
 #include <UltrasonicSensor.h>
 #include <WiFi.h>
 
-// Pines del sensor ultrasónico
 int trigPin = 2;
 int echoPin = 4;
 
-// Definir credenciales WiFi
 const char *ssid = "Mi 9T Pro";
 const char *password = "boquitapapa";
 WiFiConnection wifiConnection(ssid, password);
@@ -14,7 +12,7 @@ WiFiConnection wifiConnection(ssid, password);
 UltrasonicSensor sensor(trigPin, echoPin);
 
 WiFiClient client;
-const char* serverIP = "192.168.19.167";
+const char* serverIP = "192.168.23.167";
 
 int serverPort = 2020;
 
@@ -25,28 +23,26 @@ void setup() {
 }
 
 void loop() {
-    long distance = sensor.readDistance();
+    long condition = sensor.readDistance();
     Serial.print("Distancia: ");
-    Serial.print(distance);
+    Serial.print(condition);
     Serial.println(" cm");
 
-    int estado = 0;
+    int condition = 0;
 
-    // Determinar el estado según la distancia
-    if (distance >= 200 && distance < 300) {
-        estado = 3;  // Verde
-    } else if (distance >= 50 && distance < 200) {
-        estado = 2;  // Amarillo
-    } else if (distance >= 2 && distance < 50) {
-        estado = 1;  // Rojo
+    if (condition >= 100 && condition < 200) {
+        condition = 3;
+    } else if (condition >= 50 && condition < 100) {
+        condition = 2;
+    } else if (condition >= 2 && condition < 50) {
+        condition = 1;
     } else {
-        estado = 0;  // Ningún objeto
+        condition = 0;
     }
 
-    // Conectar al servidor y enviar el estado
     if (client.connect(serverIP, serverPort)) {
-        client.print("distance=" + String(estado) + "\n");
-        Serial.println("Estado enviado: " + String(estado));
+        client.print("distance=" + String(condition) + "\n");
+        Serial.println("Estado enviado: " + String(condition));
         client.stop();
     }
 

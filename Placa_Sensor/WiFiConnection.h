@@ -13,4 +13,4 @@ private:
     const char *password;
 };
 
-#endif // WIFICONNECTION_H
+#endif
