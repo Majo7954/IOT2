@@ -10,14 +10,14 @@ const char *ssid = "Mi 9T Pro";
 const char *password = "boquitapapa";
 WiFiConnection wifiConnection(ssid, password);
 
-const char* serverIP = "192.168.23.167";
+const char* serverIP = "192.168.82.167";
 int serverPort = 2020;
 
 LEDController redLED(ledPinRed);
 LEDController yellowLED(ledPinYellow);
 LEDController greenLED(ledPinGreen);
 
-int estado = -1;
+int condition = -1;
 
 void setup() {
     Serial.begin(115200);
@@ -34,14 +34,14 @@ void loop() {
         client.println("GET");
 
         String response = client.readStringUntil('\n');
-        estado = response.toInt();
-        Serial.println("Estado recibido: " + String(estado));
+        condition = response.toInt();
+        Serial.println("Estado recibido: " + String(condition));
 
         redLED.show(LOW);
         yellowLED.show(LOW);
         greenLED.show(LOW);
 
-        switch (estado) {
+        switch (condition) {
             case 0:
                 Serial.println("Estado 0: Todos los LEDs apagados.");
                 break;

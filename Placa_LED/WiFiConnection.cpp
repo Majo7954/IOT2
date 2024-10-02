@@ -8,14 +8,14 @@ void WiFiConnection::begin() {
     Serial.println(ssid);
 
     WiFi.begin(ssid, password);
-    int intentos = 0;
+    int attempt = 0;
     
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
         Serial.print(".");
         
-        intentos++;
-        if (intentos > 40) {
+        attempt++;
+        if (attempt > 40) {
             Serial.println("\nError: No se pudo conectar al WiFi.");
             return;
         }

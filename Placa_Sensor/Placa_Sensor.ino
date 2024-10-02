@@ -12,7 +12,7 @@ WiFiConnection wifiConnection(ssid, password);
 UltrasonicSensor sensor(trigPin, echoPin);
 
 WiFiClient client;
-const char* serverIP = "192.168.23.167";
+const char* serverIP = "192.168.82.167";
 
 int serverPort = 2020;
 
