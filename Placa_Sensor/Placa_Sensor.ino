@@ -23,18 +23,18 @@ void setup() {
 }
 
 void loop() {
-    long condition = sensor.readDistance();
+    long distance = sensor.readDistance();
     Serial.print("Distancia: ");
-    Serial.print(condition);
+    Serial.print(distance);
     Serial.println(" cm");
 
     int condition = 0;
 
-    if (condition >= 100 && condition < 200) {
+    if (distance >= 100 && distance < 200) {
         condition = 3;
-    } else if (condition >= 50 && condition < 100) {
+    } else if (distance >= 50 && distance < 100) {
         condition = 2;
-    } else if (condition >= 2 && condition < 50) {
+    } else if (distance >= 2 && distance < 50) {
         condition = 1;
     } else {
         condition = 0;
